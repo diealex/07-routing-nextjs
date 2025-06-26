@@ -3,19 +3,20 @@ import css from "./Notes.module.css";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { fetchNotes, NotesHttpResponse } from "../../lib/api";
-import NoteList from "../../components/NoteList/NoteList";
-import SearchBox from "../../components/SearchBox/SearchBox";
-import Pagination from "../../components/Pagination/Pagination";
-import NoteModal from "../../components/NoteModal/NoteModal";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import Loader from "../../components/Loader/Loader";
+import { fetchNotes, NotesHttpResponse } from "@/lib/api";
+import SearchBox from "@/components/SearchBox/SearchBox";
+import Pagination from "@/components/Pagination/Pagination";
+import NoteModal from "@/components/NoteModal/NoteModal";
+import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
+import Loader from "@/components/Loader/Loader";
+import NoteList from "@/components/NoteList/NoteList";
 
 interface NotesClientProps {
   initialData?: NotesHttpResponse;
+  tag?: string;
 }
 
-export default function Notes({ initialData }: NotesClientProps) {
+export default function Notes({ initialData, tag }: NotesClientProps) {
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -36,8 +37,8 @@ export default function Notes({ initialData }: NotesClientProps) {
   };
 
   const { data, isLoading, isError, isPending, isFetching } = useQuery({
-    queryKey: ["notes", page, debouncedSearchQuery],
-    queryFn: () => fetchNotes(page, debouncedSearchQuery),
+    queryKey: ["notes", page, debouncedSearchQuery, tag],
+    queryFn: () => fetchNotes(page, debouncedSearchQuery, tag),
     placeholderData: keepPreviousData,
     refetchOnMount: false,
     initialData,

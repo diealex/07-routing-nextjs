@@ -19,11 +19,15 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
 
 export const fetchNotes = async (
   page: number,
-  mysearchtext: string
+  mysearchtext: string,
+  tag: string = ""
 ): Promise<NotesHttpResponse> => {
   const results = await axios.get<NotesHttpResponse>(`/notes`, {
     params: {
       page,
+      tag: tag
+        ? tag.charAt(0).toUpperCase() + tag.slice(1).toLowerCase()
+        : null,
       perPage: 12,
       search: mysearchtext ? mysearchtext : null,
     },
