@@ -1,5 +1,6 @@
 import css from "./Header.module.css";
 import Link from "next/link";
+import TagsMenu from "../TagsMenu/TagsMenu";
 
 export default function Notes() {
   return (
@@ -13,7 +14,7 @@ export default function Notes() {
             <Link href="/">Home</Link>
           </li>
           <li>
-            <Link href="/notes">Notes</Link>
+            <TagsMenu />
           </li>
         </ul>
       </nav>

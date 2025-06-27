@@ -12,3 +12,4 @@ export interface AddNote {
   content?: string;
   tag: string;
 }
+export const TAGS = ["All", "Todo", "Work", "Personal", "Meeting", "Shopping"];
