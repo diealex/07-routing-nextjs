@@ -6,10 +6,11 @@ import { useDebouncedCallback } from "use-debounce";
 import { fetchNotes, NotesHttpResponse } from "@/lib/api";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
-import NoteModal from "@/components/NoteModal/NoteModal";
 import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
 import Loader from "@/components/Loader/Loader";
 import NoteList from "@/components/NoteList/NoteList";
+import Modal from "@/components/Modal/Modal";
+import NoteForm from "@/components/NoteForm/NoteForm";
 
 interface NotesClientProps {
   initialData?: NotesHttpResponse;
@@ -64,7 +65,11 @@ export default function Notes({ initialData, tag }: NotesClientProps) {
         }
       </header>
 
-      {isModalOpen && <NoteModal onClose={closeModal} />}
+      {isModalOpen && (
+        <Modal onClose={closeModal}>
+          <NoteForm onClose={closeModal} />
+        </Modal>
+      )}
       {isError && <ErrorMessage />}
       {(isLoading || isPending || isFetching) && <Loader />}
       {notes && notes.length > 0 && <NoteList notes={notes} />}

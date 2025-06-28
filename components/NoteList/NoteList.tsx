@@ -5,6 +5,7 @@ import { deleteNote } from "../../lib/api";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Loader from "../Loader/Loader";
 import { RiDeleteBin7Fill } from "react-icons/ri";
+import Link from "next/link";
 
 interface NoteListProps {
   notes: Note[];
@@ -34,7 +35,7 @@ export default function NoteList({ notes }: NoteListProps) {
               <p className={css.content}>{content}</p>
               <div className={css.linkWrap}>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href={`/notes/${id}`}>...show more</a>
+                <Link href={`/notes/${id}`}>...show more</Link>
               </div>
             </div>
             <div className={css.footer}>
