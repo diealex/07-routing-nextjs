@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import css from "./Modal.module.css";
+import { createPortal } from "react-dom";
 
 type Props = {
   children: React.ReactNode;
@@ -36,7 +37,7 @@ const Modal = ({ children, onClose = null }: Props) => {
     };
   }, [onClose]);
 
-  return (
+  return createPortal(
     <div
       className={css.backdrop}
       role="dialog"
@@ -59,7 +60,8 @@ const Modal = ({ children, onClose = null }: Props) => {
           </button>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
